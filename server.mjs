@@ -14,108 +14,113 @@ const port = process.env.PORT || 3000;
 //     port = 3000;
 // }
 
-let users =[];
+let users = [];
 /////generate random number from 1to 10000000000
 
-function randomNumber(){
-  return Math.floor(Math.random()*10000000000);
+function randomNumber() {
+  return Math.floor(Math.random() * 10000000000);
 }
 
-app.post("/user",(req,res)=>{
+app.post("/user", (req, res) => {
 
-    console.log(req.body);//https://expressjs.com/en/4x/api.html#req.body
+  console.log(req.body);//https://expressjs.com/en/4x/api.html#req.body
 
-    let newUser={
-      id:randomNumber(),
-      fullName:req.body.fullName,
-      userName: req.body.userName,
-      passward:req.body.passward,
-    }
+  let newUser = {
+    id: randomNumber(),
+    fullName: req.body.fullName,
+    userName: req.body.userName,
+    passward: req.body.passward,
+  }
 
-    users.push(newUser);
+  users.push(newUser);
 
-    res.status(201).send("user is created");
+  res.status(201).send("user is created");
 
 })
 
-app.get("/user/:userId",(req,res)=>{//get single user
- 
+app.get("/user/:userId", (req, res) => {//get single user
+
   console.log(req.params.userId);
   console.log(users);
   console.log("Maria is very beautiful");
 
 
 
-  let userId =req.params.userId;
-  let isFound=false;
 
-   for (let i=0; i < users.length; i++) {
-    if (users[i].id == userId){
-        res.send(users[i]);
-        isFound =true;
-        break;
+  let userId = req.params.userId;
+  let isFound = false;
+
+  for (let i = 0; i < users.length; i++) {
+    console.log("Maria is very pretty", i);
+    if (users[i].id == userId) {
+
+      console.log("inside");
+
+      res.send(users[i]);
+      isFound = true;
+      break;
     }
-   }
-   if(!isFound){
+  }
+   console.log(isFound);
+
+  if (!isFound) {
     res.status(204);
     res.send("user not found");
 
-   }
+  }
 })
 
 app.get('/users', (req, res) => { //get all users
   res.send(users)
 })
 
-app.put("/user/:userId",(req,res)=>{
-    res.send("your user is modified");
-   
-    let userId =(" req.params.userId");
-    let userIndex = -1;
+app.put("/user/:userId", (req, res) => {
+  res.send("your user is modified");
 
-    for (let i=0; i < users.length; i++) {
-      if (users[i].id == userId){
-           userIndex = i;
-          break;
-      }
-     }
-     if(userIndex === -1){
-      res.status(204).send("user not found");
-     }else{
-     if(req.body.fullName) 
-     {users[userIndex].fullName = req.body.fullName};
+  let userId = (" req.params.userId");
+  let userIndex = -1;
 
-     if(req.body.userName) 
-     {users[userIndex].userName  = req.body.userName};
-
-     if(req.body.passward) 
-     {users[userIndex].passward = req.body.passward
-    };
-          res.send(users[userIndex]);
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].id == userId) {
+      userIndex = i;
+      break;
     }
-     }
+  }
+  if (userIndex === -1) {
+    res.status(204).send("user not found");
+  } else {
+    if (req.body.fullName) { users[userIndex].fullName = req.body.fullName };
+
+    if (req.body.userName) { users[userIndex].userName = req.body.userName };
+
+    if (req.body.passward) {
+      users[userIndex].passward = req.body.passward
+    };
+    res.send(users[userIndex]);
+  }
+}
 )
 
-app.delete("/user/:userId",(req,res)=>{
+app.delete("/user/:userId", (req, res) => {
 
-  let userId =(" req.params.userId");
-    let userIndex = -1;
+  let userId = (" req.params.userId");
+  let userIndex = -1;
 
-    for (let i=0; i < users.length; i++) {
-      if (users[i].id == userId){
-           userIndex = i;
-          break;
-      }
-     }
-     if(userIndex === -1){
-      res.status(204).send("user not found");
-     }else{
-     users.splice(userIndex, 1);
-     res.send("user is deleted");
-     }
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].id == userId) {
+      userIndex = i;
+      break;
+    }
+  }
+  if (userIndex === -1) {
+    res.status(204).send("user not found");
+  } else {
+    users.splice(userIndex, 1);
+    res.send("user is deleted");
+  }
 })
-app.delete("/users",(req,res)=>{
-  users=[];
+app.delete("/users", (req, res) => {
+  users = [];
   res.send("All users are deleted");
 })
 
