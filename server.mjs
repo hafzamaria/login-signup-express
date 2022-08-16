@@ -64,9 +64,8 @@ app.get("/user/:userId", (req, res) => {//get single user
    console.log(isFound);
 
   if (!isFound) {
-    res.status(204);
-    res.send("user not found");
-
+ res.status(204).send("user not found & Maria is beautiful");
+ 
   }
 })
 
