@@ -39,6 +39,12 @@ app.post("/user",(req,res)=>{
 })
 
 app.get("/user/:userId",(req,res)=>{//get single user
+ 
+  console.log(req.params.userId);
+  console.log(users);
+  console.log("Maria is very beautiful");
+
+
 
   let userId =req.params.userId;
   let isFound=false;
