@@ -109,7 +109,7 @@ app.delete("/user/:userId",(req,res)=>{
 })
 app.delete("/users",(req,res)=>{
   users=[];
-  res.send("All users deleted");
+  res.send("All users are deleted");
 })
 
 app.listen(port, () => {
