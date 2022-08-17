@@ -42,7 +42,7 @@ app.get("/user/:userId", (req, res) => {//get single user
 
   console.log(req.params.userId);
   console.log(users);
-  console.log("Maria is very beautiful");
+  
 
 
 
@@ -51,7 +51,7 @@ app.get("/user/:userId", (req, res) => {//get single user
   let isFound = false;
 
   for (let i = 0; i < users.length; i++) {
-    console.log("Maria is very pretty", i);
+    console.log( i);
     if (users[i].id == userId) {
 
       console.log("inside");
@@ -64,7 +64,7 @@ app.get("/user/:userId", (req, res) => {//get single user
    console.log(isFound);
 
   if (!isFound) {
- res.status(204).send("user not found & Maria is beautiful");
+ res.status(204).send("user not found");
  
   }
 })
@@ -124,5 +124,5 @@ app.delete("/users", (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}Maria is beautiful`)
+  console.log(`Example app listening on port ${port}`)
 })
